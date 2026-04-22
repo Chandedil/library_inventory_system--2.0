@@ -35,16 +35,15 @@ public class AddLoans extends javax.swing.JFrame {
         setUndecorated(true); // REQUIRED for opacity
         initComponents();
         setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-//        
-//        jTable1.getTableHeader().setPreferredSize(
-//        new java.awt.Dimension(jTable1.getTableHeader().getWidth(), 50)
-//    );
-//           jTable1.getTableHeader().setFont(
-//        jTable1.getTableHeader().getFont().deriveFont(18f)
-//    );
-//           
-//           jTable1.setFont(jTable1.getFont().deriveFont(16f));
-//      
+
+        tblTransactions.getTableHeader().setPreferredSize(
+                new java.awt.Dimension(tblTransactions.getTableHeader().getWidth(), 50)
+        );
+        tblTransactions.getTableHeader().setFont(
+                tblTransactions.getTableHeader().getFont().deriveFont(18f)
+        );
+
+        tblTransactions.setFont(tblTransactions.getFont().deriveFont(16f));
 
         cmbBook.removeAllItems();
         cmbBook.addItem("-- Select Book --");
@@ -144,20 +143,22 @@ public class AddLoans extends javax.swing.JFrame {
         btnSave.setEnabled(false);
 
         loodBooks(cmbBook);
-        loadAcquisitionNumber(cmbAcquisitionNumber); // ← ADD THIS
+
+        // ✅ Manually reset acquisition combo to default placeholder
+        cmbAcquisitionNumber.removeAllItems();
+        cmbAcquisitionNumber.addItem("-- Select Acquisition Number --");
+        cmbAcquisitionNumber.setSelectedIndex(0);
+
+        loadBorrowerName(cmbBorrowerName);
+
         if (cmbBorrowerName.getItemCount() > 0) {
             cmbBorrowerName.setSelectedIndex(0);
         }
-
         if (cmbBook.getItemCount() > 0) {
             cmbBook.setSelectedIndex(0);
         }
 
-        if (cmbAcquisitionNumber.getItemCount() > 0) {
-            cmbAcquisitionNumber.setSelectedIndex(0);
-        }
-
-        tblTransactions.clearSelection(); // ← ADD
+        tblTransactions.clearSelection();
     }
 
     private int getBorrowerId(String name) {
